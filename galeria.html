@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeria — Paulo | Raspagem de Taco e Assoalho</title>
+<meta name="description" content="Galeria completa de pisos de madeira restaurados por Paulo: taco, parquet, assoalho e escadas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wenge:#1c130d;
+    --walnut:#4a2e1a;
+    --walnut-2:#3a2314;
+    --honey:#b8763e;
+    --varnish:#e2a84f;
+    --cream:#f7f1e6;
+    --cream-2:#efe4d1;
+    --ink:#2a1f18;
+    --shadow: 0 20px 50px rgba(20,12,6,0.25);
+    --radius: 4px;
+    --wa: #25D366;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Work Sans', sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block; max-width:100%;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  .container{ width:min(1180px, 92%); margin:0 auto; }
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:700; color:var(--wenge); line-height:1.15; }
+  .eyebrow{
+    font-family:'Work Sans', sans-serif;
+    text-transform:uppercase; letter-spacing:.16em; font-size:.74rem; font-weight:600;
+    color:var(--honey); display:flex; align-items:center; gap:.6em;
+  }
+  .eyebrow::before{ content:""; width:26px; height:1px; background:var(--honey); display:inline-block; }
+
+  /* chevron signature */
+  .chevron-rule{
+    height:26px; width:100%;
+    background-image:
+      repeating-linear-gradient(45deg, var(--walnut) 0 10px, var(--walnut-2) 10px 20px),
+      repeating-linear-gradient(-45deg, var(--honey) 0 10px, var(--walnut) 10px 20px);
+    background-size:50% 100%;
+    background-position: left top, right top;
+    background-repeat:no-repeat;
+    opacity:.9;
+  }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:.6em;
+    padding:.9em 1.6em; border-radius:var(--radius);
+    font-weight:600; font-size:.95rem; border:1.5px solid transparent;
+    cursor:pointer; transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    white-space:nowrap;
+  }
+  .btn-primary{ background:var(--wa); color:#fff; box-shadow:0 10px 24px rgba(37,211,102,.35); }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 14px 30px rgba(37,211,102,.45); }
+  .btn-outline{ background:transparent; border-color:rgba(247,241,230,.5); color:var(--cream); }
+  .btn-outline:hover{ background:rgba(247,241,230,.12); }
+  .btn-ghost-dark{ background:transparent; border-color:rgba(42,31,24,.3); color:var(--ink); }
+  .btn-ghost-dark:hover{ background:rgba(42,31,24,.06); }
+  .btn svg{ width:18px; height:18px; flex-shrink:0; }
+
+  /* header */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(28,19,13,0.92);-webkit-backdrop-filter: (6px); backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(247,241,230,.08);
+  }
+  .nav-wrap{ display:flex; align-items:center; justify-content:space-between; padding:.85em 0; gap:1em; flex-wrap:wrap; }
+  .logo{ display:flex; flex-direction:column; line-height:1; color:var(--cream); }
+  .logo strong{ font-family:'Fraunces', serif; font-style:italic; font-weight:600; font-size:1.5rem; }
+  .logo span{ font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--varnish); margin-top:.25em; font-weight:600; }
+  .back-link{
+    display:inline-flex; align-items:center; gap:.5em;
+    color:var(--cream-2); font-size:.92rem; font-weight:500;
+  }
+  .back-link svg{ width:18px; height:18px; }
+  .back-link:hover{ color:var(--varnish); }
+
+  /* page head */
+  .page-head{
+    padding:9.5em 0 3em;
+    background:var(--wenge);
+    color:var(--cream);
+    text-align:center;
+  }
+  .page-head .eyebrow{ justify-content:center; color:var(--varnish); }
+  .page-head .eyebrow::before{ display:none; }
+  .page-head h1{ color:var(--cream); font-size:clamp(2rem,4vw,3rem); margin-top:.4em; }
+  .page-head p{ max-width:48ch; margin:.9em auto 0; color:rgba(247,241,230,.72); }
+
+  /* top back bar under header, above gallery */
+  .top-actions{
+    padding:2.2em 0 0;
+  }
+  .top-actions a{ font-size:.95rem; }
+
+  /* full gallery grid */
+  .full-gallery{ padding:3em 0 6em; }
+  .fg-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.3em;
+  }
+  .fg-item{
+    position:relative;
+    overflow:hidden;
+    border-radius:var(--radius);
+    box-shadow:0 12px 30px rgba(20,12,6,.15);
+    aspect-ratio:4/5;
+  }
+  .fg-item img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+  .fg-item:hover img{ transform:scale(1.06); }
+  .fg-item.wide{ grid-column:span 2; aspect-ratio:16/10; }
+  .fg-cap{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:1.5em 1.3em 1.1em;
+    background:linear-gradient(180deg, transparent, rgba(15,10,6,.85));
+    color:var(--cream);
+  }
+  .fg-cap .tag{
+    display:block; font-size:.68rem; text-transform:uppercase; letter-spacing:.14em;
+    color:var(--varnish); font-weight:600; margin-bottom:.35em;
+  }
+  .fg-cap .title{ font-family:'Fraunces', serif; font-size:1.15rem; font-weight:600; }
+
+  /* CTA band */
+  .cta-band{
+    background:var(--walnut);
+    color:var(--cream);
+    text-align:center;
+    padding:4.5em 0;
+  }
+  .cta-band h2{ color:var(--cream); font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:.5em; }
+  .cta-band p{ color:rgba(247,241,230,.75); max-width:44ch; margin:0 auto 1.8em; }
+
+  footer{
+    background:var(--wenge); color:rgba(247,241,230,.55);
+    padding:2.4em 0; text-align:center; font-size:.85rem;
+  }
+
+  /* ---------- Floating WhatsApp ---------- */
+.wa-float{
+    position:fixed;
+    right:1.6em;
+    bottom:5.8em; /* sobe o WhatsApp para deixar espaço para Instagram */
+    z-index:200;
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    background:var(--wa);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 26px rgba(0,0,0,.35);
+    animation:wa-pulse 2.6s infinite;
+}
+
+.wa-float svg{
+    width:40px;
+    height:40px;
+    color:#fff;
+}
+
+
+/* ---------- Floating Instagram ---------- */
+.insta-float{
+    position:fixed;
+    right:1.6em;
+    bottom:1.6em;
+    z-index:200;
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    background:linear-gradient(45deg,#feda75,#d62976,#962fbf,#4f5bd5);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 26px rgba(0,0,0,.35);
+}
+
+.insta-float svg{
+    width:40px;
+    height:40px;
+    color:#fff;
+}
+
+
+/* Animação WhatsApp */
+@keyframes wa-pulse{
+  0%{
+    box-shadow:0 10px 26px rgba(0,0,0,.35),
+    0 0 0 0 rgba(37,211,102,.55);
+  }
+  
+  70%{
+    box-shadow:0 10px 26px rgba(0,0,0,.35),
+    0 0 0 16px rgba(37,211,102,0);
+  }
+  
+  100%{
+    box-shadow:0 10px 26px rgba(0,0,0,.35),
+    0 0 0 0 rgba(37,211,102,0);
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce){
+
+  html{
+    scroll-behavior:auto;
+  }
+  
+  .wa-float{
+    animation:none;
+  }
+  
+  .gal-item:hover img{
+    transform:none;
+  }
+}
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .wa-float{ animation:none; }
+    .fg-item:hover img{ transform:none; }
+  }
+
+  @media (max-width: 820px){
+    .fg-grid{ grid-template-columns:1fr 1fr; }
+    .fg-item.wide{ grid-column:span 2; }
+  }
+  @media (max-width: 560px){
+    .fg-grid{ grid-template-columns:1fr; }
+    .fg-item.wide{ grid-column:span 1; }
+    .fg-item{ aspect-ratio:4/3; }
+  }
+
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo">
+      <strong>Paulo</strong>
+      <span>Raspagem de Taco &amp; Assoalho</span>
+    </a>
+    <a class="back-link" href="index.html">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Voltar para o site
+    </a>
+  </div>
+</header>
+
+<div class="page-head">
+  <div class="container">
+    <p class="eyebrow">Galeria completa</p>
+    <h1>Todos os pisos restaurados</h1>
+    <p>Fotos reais de trabalhos de raspagem, lixamento e aplicação de verniz em taco, parquet e assoalho.</p>
+  </div>
+</div>
+
+<div class="chevron-rule"></div>
+
+<section class="full-gallery">
+  <div class="container">
+    <div class="top-actions">
+      <a class="btn btn-ghost-dark" href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Voltar
+      </a>
+    </div>
+
+    <div class="fg-grid" style="margin-top:2em;">
+
+      <div class="fg-item wide">
+        <img src="images/piso-parquet-losango.jpg" alt="Piso em desenho de losango, com tacos de diferentes tons de madeira e acabamento em alto brilho">
+        <div class="fg-cap"><span class="tag">Sala de entrada</span><span class="title">Taco em desenho de losango</span></div>
+      </div>
+
+      <div class="fg-item">
+        <img src="images/quarto-taco.jpg" alt="Piso de taco restaurado em quarto, com veios de madeira valorizados">
+        <div class="fg-cap"><span class="tag">Quarto</span><span class="title">Assoalho raspado e envernizado</span></div>
+      </div>
+
+      <div class="fg-item wide">
+        <img src="images/piso-taco-mesclado.jpg" alt="Piso de taco mesclado, com tábuas de tons variados e acabamento brilhante">
+        <div class="fg-cap"><span class="tag">Sala ampla</span><span class="title">Taco mesclado, alto brilho</span></div>
+      </div>
+
+      <div class="fg-item">
+        <img src="images/piso-escadaria.jpg" alt="Assoalho de tábua corrida próximo a uma escada com estrutura metálica">
+        <div class="fg-cap"><span class="tag">Sala ampla</span><span class="title">Taco mesclado — antes do serviço ser realizado</span></div>
+      </div>
+
+      <div class="fg-item wide">
+        <img src="images/sala-ambientes.jpg" alt="Piso de madeira integrando dois ambientes, com janelas de veneziana ao fundo">
+        <div class="fg-cap"><span class="tag">Integração de ambientes</span><span class="title">Taco restaurado entre dois cômodos</span></div>
+      </div>
+
+         <div class="fg-item">
+        <img src="images/taco.peroba.jpeg" alt="Piso de taco restaurado em quarto, com veios de madeira valorizados">
+        <div class="fg-cap"><span class="tag">sala</span><span class="title">Taco de peroba raspado e envernizado</span></div>
+      </div>
+
+
+
+
+     <div class="fg-item wide">
+        <img src="images/sala-assoalho.antes.jpg" alt="Piso em desenho de losango, com tacos de diferentes tons de madeira e acabamento em alto brilho">
+        <div class="fg-cap"><span class="tag">Sala de entrada</span><span class="title">Assoalho raspado e envernizado</span></div>
+      </div>
+
+      <div class="fg-item">
+        <img src="images/sala-assoalho.depois.jpg" alt="Piso de taco restaurado em quarto, com veios de madeira valorizados">
+        <div class="fg-cap"><span class="tag">Sala</span><span class="title">Assoalho — antes do serviço ser realizado</span></div>
+      </div>
+
+      <div class="fg-item wide">
+        <img src="images/escada1-depois.jpg" alt="Piso de taco mesclado, com tábuas de tons variados e acabamento brilhante">
+        <div class="fg-cap"><span class="tag">Escada</span><span class="title">Escada — após o serviço</span></div>
+      </div>
+
+      <div class="fg-item">
+        <img src="images/escada1-antes.jpg" alt="Assoalho de tábua corrida próximo a uma escada com estrutura metálica">
+        <div class="fg-cap"><span class="tag">Escada</span><span class="title">Escada — Antes do serviço ser realizado</span></div>
+      </div>
+
+      <div class="fg-item wide">
+        <img src="images/depois-quarto2.jpg" alt="Piso de madeira integrando dois ambientes, com janelas de veneziana ao fundo">
+        <div class="fg-cap"><span class="tag">Quarto</span><span class="title">Taco raspado e envernizado</span></div>
+      </div>
+
+         <div class="fg-item">
+        <img src="images/antes-quarto2.jpg" alt="Piso de taco restaurado em quarto, com veios de madeira valorizados">
+        <div class="fg-cap"><span class="tag">Quarto</span><span class="title">Taco — antes do serviço ser realizado</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="container">
+    <h2>Gostou do resultado?</h2>
+    <p>Seu piso pode ficar assim também. Envie fotos do ambiente pelo WhatsApp e receba um orçamento gratuito.</p>
+    <a class="btn btn-primary" target="_blank" rel="noopener"
+         href="https://wa.me/5519991554765?text=Ol%C3%A1%2C%20Paulo!%20Vi%20o%20site%20e%20gostaria%20de%20um%20or%C3%A7amento.">
+        <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.04 3C9.4 3 4 8.35 4 14.94c0 2.1.55 4.15 1.6 5.96L4 29l8.3-1.53c1.74.94 3.7 1.44 5.7 1.44 6.63 0 12.03-5.35 12.03-11.94C30.03 8.35 22.68 3 16.04 3zm7.05 17.06c-.3.83-1.72 1.6-2.38 1.7-.61.1-1.38.14-2.22-.14-.51-.16-1.17-.38-2.02-.75-3.55-1.53-5.87-5.1-6.05-5.34-.18-.24-1.45-1.93-1.45-3.68 0-1.75.92-2.6 1.25-2.96.32-.35.7-.44.93-.44.23 0 .47 0 .67.01.21.01.5-.08.78.6.3.72 1.02 2.49 1.11 2.67.09.18.15.39.03.63-.12.24-.18.39-.36.6-.18.21-.38.47-.54.63-.18.18-.37.37-.16.73.21.36.94 1.56 2.02 2.53 1.39 1.24 2.56 1.62 2.92 1.8.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.8-.18.32.12 2.05.97 2.4 1.14.35.18.58.27.67.42.09.15.09.85-.21 1.68z"/></svg>
+        Pedir orçamento no WhatsApp
+      </a>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    © <span id="year"></span> Paulo — Raspagem de Taco e Assoalho.
+  </div>
+</footer>
+
+<a class="wa-float" target="_blank" rel="noopener" aria-label="Chamar no WhatsApp"
+   href="https://wa.me/5519991554765?text=Ol%C3%A1%2C%20Paulo!%20Gostaria%20de%20um%20or%C3%A7amento%20para%20o%20meu%20piso.">
+  <svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.04 3C9.4 3 4 8.35 4 14.94c0 2.1.55 4.15 1.6 5.96L4 29l8.3-1.53c1.74.94 3.7 1.44 5.7 1.44 6.63 0 12.03-5.35 12.03-11.94C30.03 8.35 22.68 3 16.04 3zm7.05 17.06c-.3.83-1.72 1.6-2.38 1.7-.61.1-1.38.14-2.22-.14-.51-.16-1.17-.38-2.02-.75-3.55-1.53-5.87-5.1-6.05-5.34-.18-.24-1.45-1.93-1.45-3.68 0-1.75.92-2.6 1.25-2.96.32-.35.7-.44.93-.44.23 0 .47 0 .67.01.21.01.5-.08.78.6.3.72 1.02 2.49 1.11 2.67.09.18.15.39.03.63-.12.24-.18.39-.36.6-.18.21-.38.47-.54.63-.18.18-.37.37-.16.73.21.36.94 1.56 2.02 2.53 1.39 1.24 2.56 1.62 2.92 1.8.36.18.57.15.78-.09.21-.24.9-1.05 1.14-1.41.24-.36.48-.3.8-.18.32.12 2.05.97 2.4 1.14.35.18.58.27.67.42.09.15.09.85-.21 1.68z"/></svg>
+</a>
+<!-- Botão Instagram -->
+<a class="insta-float" target="_blank" rel="noopener" aria-label="Instagram do Paulo"
+href="https://instagram.com/paulo.raspagem.de.taco">
+
+<svg viewBox="0 0 24 24" fill="currentColor">
+<path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8zm8.7 1.5a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/>
+</svg>
+
+</a>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
